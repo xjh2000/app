@@ -1,0 +1,56 @@
+version: "3.9"
+
+services:
+  db:
+    image: mariadb
+    restart: always
+    command: --transaction-isolation=READ-COMMITTED --binlog-format=ROW
+    expose:
+      - 3306
+    volumes:
+      - ~/app/mariadb/nextcloud:/var/lib/mysql/nextcloud
+    environment:
+      - MYSQL_ROOT_PASSWORD=mariadb
+      - MYSQL_PASSWORD=mariadb
+      - MYSQL_DATABASE=nextcloud
+      - MYSQL_USER=nextcloud
+
+  nextcloud:
+    # out net too slow , push myself image
+    image: swr.cn-north-4.myhuaweicloud.com/xjh-huawei/nextcloud
+    restart: always
+    expose:
+      - 80
+    # due To Documentation too big , bind volumes on win wsl too slow ,linux open
+#    volumes:
+#      - ~/app/nextcloud/:/var/www/html/
+    environment:
+      - MYSQL_PASSWORD=mariadb
+      - MYSQL_DATABASE=nextcloud
+      - MYSQL_USER=nextcloud
+      - MYSQL_HOST=db
+
+  halo:
+    image: halohub/halo:1.5.0-alpha.3
+    # due To Documentation too big , bind volumes on win wsl too slow ,linux open
+#    volumes:
+#      - ~/app/halo:/root/.halo
+    restart:
+      unless-stopped
+    expose:
+      - 8090
+    tty:
+      true
+    stdin_open:
+      true
+
+  caddy:
+    image: caddy
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ~/app/caddy/Caddyfile:/etc/caddy/Caddyfile
+      - ~/app/caddy/caddy_data:/data
+      - ~/app/caddy/caddy_config:/config
