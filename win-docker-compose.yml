@@ -17,7 +17,7 @@ services:
 
   nextcloud:
     # out net too slow , push myself image
-    image: swr.cn-north-4.myhuaweicloud.com/xjh-huawei/nextcloud
+    image: nextcloud
     restart: always
     expose:
       - 80
