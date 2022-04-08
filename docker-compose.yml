@@ -14,23 +14,8 @@ services:
     environment:
       - MYSQL_ROOT_PASSWORD=mariadb
       - MYSQL_PASSWORD=mariadb
-      - MYSQL_DATABASE=nextcloud
-      - MYSQL_USER=nextcloud
-
-  nextcloud:
-    # out net too slow , push myself image
-    image: swr.cn-north-4.myhuaweicloud.com/xjh-huawei/nextcloud
-    restart: always
-    expose:
-      - 80
-    # due To Documentation too big , bind volumes on win wsl too slow ,linux open
-    volumes:
-      - ~/app/nextcloud/:/var/www/html/
-    environment:
-      - MYSQL_PASSWORD=mariadb
-      - MYSQL_DATABASE=nextcloud
-      - MYSQL_USER=nextcloud
-      - MYSQL_HOST=db
+      - MYSQL_DATABASE=main
+      - MYSQL_USER=xjh
 
   halo:
     image: halohub/halo:1.5.0-alpha.3
