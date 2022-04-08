@@ -5,10 +5,12 @@ services:
     image: mariadb
     restart: always
     command: --transaction-isolation=READ-COMMITTED --binlog-format=ROW
+    ports:
+      - "3306:3306"
     expose:
       - 3306
     volumes:
-      - ~/app/mariadb/nextcloud:/var/lib/mysql/nextcloud
+      - ~/app/mariadb/:/var/lib/mysql/
     environment:
       - MYSQL_ROOT_PASSWORD=mariadb
       - MYSQL_PASSWORD=mariadb
