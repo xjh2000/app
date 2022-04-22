@@ -1,21 +1,23 @@
 version: "3.9"
 
 services:
-  db:
-    image: mariadb
+
+  mongo:
+    image: mongo
     restart: always
-    command: --transaction-isolation=READ-COMMITTED --binlog-format=ROW
     ports:
-      - "3306:3306"
-    expose:
-      - 3306
+      - "27017:27017"
     volumes:
-      - ~/app/mariadb/:/var/lib/mysql/
+      - "~/app/mongo:/data/db"
     environment:
-      - MYSQL_ROOT_PASSWORD=mariadb
-      - MYSQL_PASSWORD=mariadb
-      - MYSQL_DATABASE=main
-      - MYSQL_USER=xjh
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: root
+
+  movie-service:
+    image: registry.cn-hangzhou.aliyuncs.com/xjh2000/movie
+    restart: always
+    expose:
+      - "8000"
 
   halo:
     image: halohub/halo:1.5.0-alpha.3
