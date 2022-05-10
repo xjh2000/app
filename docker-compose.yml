@@ -8,8 +8,8 @@ services:
       - ~/app/halo:/root/.halo
     restart:
       unless-stopped
-    expose:
-      - 8000
+    ports:
+      - "8000:8090"
     tty:
       true
     stdin_open:
