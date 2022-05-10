@@ -18,8 +18,7 @@ blog.xjh2000.top {
     reverse_proxy halo:8090
 }
 
-api.xjh2000.top {
 
-    reverse_proxy movie-service:8000    
+test.xjh2000.top {
+    reverse_proxy frp-server:8000
 }
-

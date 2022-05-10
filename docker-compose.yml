@@ -1,4 +1,4 @@
-version: "3.9"
+version: "3.3"
 
 services:
 
@@ -25,3 +25,12 @@ services:
       - ~/app/caddy/Caddyfile:/etc/caddy/Caddyfile
       - ~/app/caddy/caddy_data:/data
       - ~/app/caddy/caddy_config:/config
+
+
+  frp-server:
+    image: snowdreamtech/frps
+    ports:
+      - "7000:7000"
+    restart: always
+    volumes:
+      - ~/app/frp/frps.ini:/etc/frp/frps.ini
