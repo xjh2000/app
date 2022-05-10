@@ -1,4 +1,4 @@
-version: "3.9"
+version: "3.1"
 
 services:
 
@@ -9,19 +9,16 @@ services:
     restart:
       unless-stopped
     expose:
-      - 8090
+      - 8000
     tty:
       true
     stdin_open:
       true
 
-  caddy:
-    image: caddy
-    restart: unless-stopped
-    ports:
-      - "80:80"
-      - "443:443"
+
+  frp-client:
+    image: snowdreamtech/frpc
+    network_mode: "host"
+    restart: always
     volumes:
-      - ~/app/caddy/Caddyfile:/etc/caddy/Caddyfile
-      - ~/app/caddy/caddy_data:/data
-      - ~/app/caddy/caddy_config:/config
+      - ~/app/frp/frpc.ini:/etc/frp/frpc.ini
