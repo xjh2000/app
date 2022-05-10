@@ -29,5 +29,5 @@ test.xjh2000.top {
     }
 	templates
 	file_server browse
-    reverse_proxy frp-server:8000
+    reverse_proxy frps:8000
 }

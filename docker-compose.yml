@@ -27,10 +27,11 @@ services:
       - ~/app/caddy/caddy_config:/config
 
 
-  frp-server:
+  frps:
     image: snowdreamtech/frps
     ports:
       - "7000:7000"
-    restart: always
+    restart:
+      unless-stopped
     volumes:
       - ~/app/frp/frps.ini:/etc/frp/frps.ini
