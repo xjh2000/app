@@ -23,11 +23,3 @@ api.xjh2000.top {
     reverse_proxy movie-service:8000    
 }
 
-
-cloud.xjh2000.top {
-   
-    rewrite /.well-known/carddav /remote.php/dav
-    rewrite /.well-known/caldav /remote.php/dav
-
-    reverse_proxy nextcloud:80
-}
