@@ -14,11 +14,3 @@ services:
       true
     stdin_open:
       true
-
-
-  frp-client:
-    image: snowdreamtech/frpc
-    network_mode: "host"
-    restart: always
-    volumes:
-      - ~/app/frp/frpc.ini:/etc/frp/frpc.ini
