@@ -18,16 +18,3 @@ blog.xjh2000.top {
     reverse_proxy halo:8090
 }
 
-
-test.xjh2000.top {
-    encode zstd gzip
-    header {
-        Access-Control-Allow-Origin "{http.request.header.Origin}"
-        Access-Control-Allow-Credentials true
-        Access-Control-Allow-Methods *
-        Access-Control-Allow-Headers DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Authorization
-    }
-	templates
-	file_server browse
-    reverse_proxy frps:8000
-}
