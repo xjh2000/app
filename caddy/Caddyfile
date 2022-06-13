@@ -7,6 +7,6 @@ api.xjh2000.top {
         Access-Control-Allow-Methods *
         Access-Control-Allow-Headers DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Authorization
     }
-    reverse_proxy /api/* free-movie-server:8080
+    reverse_proxy  free-movie-server:8080
 }
 
