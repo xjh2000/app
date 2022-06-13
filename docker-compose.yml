@@ -1,19 +1,6 @@
-version: "3.3"
+version: "3.1"
 
 services:
-
-  halo:
-    image: halohub/halo
-    volumes:
-      - ~/app/halo:/root/.halo
-    restart:
-      unless-stopped
-    expose:
-      - 8090
-    tty:
-      true
-    stdin_open:
-      true
 
   caddy:
     image: caddy
@@ -25,3 +12,15 @@ services:
       - ~/app/caddy/Caddyfile:/etc/caddy/Caddyfile
       - ~/app/caddy/caddy_data:/data
       - ~/app/caddy/caddy_config:/config
+
+  free-movie-server:
+    image: 934622645/free-movie-server
+    restart: unless-stopped
+
+  watchtower:
+    image: containrrr/watchtower
+    restart: unless-stopped
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /root/.docker/config.json:/config.json
+    command: --interval 60 --cleanup
