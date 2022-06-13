@@ -1,20 +1,12 @@
-localhost {
-    rewrite /.well-known/carddav /remote.php/dav
-    rewrite /.well-known/caldav /remote.php/dav
 
-    reverse_proxy nextcloud:80
-}
 
-blog.xjh2000.top {
-    encode zstd gzip
+api.xjh2000.top {
     header {
         Access-Control-Allow-Origin "{http.request.header.Origin}"
         Access-Control-Allow-Credentials true
         Access-Control-Allow-Methods *
         Access-Control-Allow-Headers DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Authorization
     }
-	templates
-	file_server browse
-    reverse_proxy halo:8090
+    reverse_proxy free-movie-server:8080
 }
 
