@@ -17,17 +17,6 @@ services:
         image: 934622645/free-movie-server
         restart: unless-stopped
 
-    mysql:
-        image: mysql
-        command:
-            - "--default-authentication-plugin=mysql_native_password"
-        restart: unless-stopped
-        volumes:
-            - mysql_data:/var/lib/mysql
-        environment:
-            MYSQL_ROOT_PASSWORD: "root"
-            MYSQL_DATABASE: "free_movie"
-
     watchtower:
         image: containrrr/watchtower
         restart: unless-stopped
@@ -35,5 +24,14 @@ services:
             - /var/run/docker.sock:/var/run/docker.sock
         command: --interval 60 --cleanup
 
+    mongo:
+        image: mongo
+        restart: always
+        volumes:
+            -   mongo_data:/data/db
+        environment:
+            MONGO_INITDB_ROOT_USERNAME: root
+            MONGO_INITDB_ROOT_PASSWORD: root
+
 volumes:
-    mysql_data:
+    mongo_data:
