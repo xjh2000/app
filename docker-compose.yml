@@ -2,18 +2,21 @@ version: "3.1"
 
 services:
 
-    mongo:
-        image: mongo:4.4.13
+    postgres:
+        image: postgres:14.2
         restart: always
         expose:
-            - 27017
+            - 5432
         ports:
-            - "27017:27017"
+            - "5432:5432"
         volumes:
-            - mongo_data:/data/db
+            - postgres_data:/var/lib/postgresql/data
         environment:
-            MONGO_INITDB_ROOT_USERNAME: root
-            MONGO_INITDB_ROOT_PASSWORD: root
+            - POSTGRES_USER=postgres
+            - POSTGRES_PASSWORD=postgres
+            - POSTGRES_DB=quarkus
+
+
     redis:
         image: redis:6-alpine
         restart: always
@@ -21,4 +24,4 @@ services:
             - "6379:6379"
 
 volumes:
-    mongo_data:
+    postgres_data:
