@@ -1,6 +1,0 @@
-
-
-api.xjh2000.top {
-    reverse_proxy  free-movie-server:8080
-}
-

@@ -1,44 +1,11 @@
-version: "3.0"
+version: "3.7"
 
 services:
+  redis:
+    image: redis
+    restart: on-failure
+    environment:
+      - TZ=Asia/Shanghai
+    ports:
+      - "6379:6379"
 
-    caddy:
-        image: caddy
-        restart: unless-stopped
-        ports:
-            - "80:80"
-            - "443:443"
-        volumes:
-            - ~/app/caddy/Caddyfile:/etc/caddy/Caddyfile
-            - ~/app/caddy/caddy_data:/data
-            - ~/app/caddy/caddy_config:/config
-
-    free-movie-server:
-        image: 934622645/free-movie-server
-        restart: unless-stopped
-
-    watchtower:
-        image: containrrr/watchtower
-        restart: unless-stopped
-        volumes:
-            - /var/run/docker.sock:/var/run/docker.sock
-        command: --interval 60 --cleanup
-
-    postgres:
-        image: postgres:14.2
-        restart: always
-        expose:
-            - 5432
-        volumes:
-            - postgres_data:/var/lib/postgresql/data
-        environment:
-            - POSTGRES_USER=postgres
-            - POSTGRES_PASSWORD=postgres
-            - POSTGRES_DB=quarkus
-
-    redis:
-        image: redis:6-alpine
-        restart: always
-
-volumes:
-    postgres_data:
