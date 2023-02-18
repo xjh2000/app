@@ -2,6 +2,18 @@ version: "3.7"
 
 services:
 
+  mysql:
+    image: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    ports:
+      - '3306:3306'
+    volumes:
+      - mysql-db:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: mysql
+
+
   mongo:
     image: mongo
     restart: always
@@ -12,13 +24,14 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: mongo
+      MONGO_INITDB_DATABASE: blog
 
 
   blog:
     image: registry.cn-hangzhou.aliyuncs.com/xjh2000/blog
     restart: on-failure
     environment:
-      - TZ=Asia/Shanghai
+      - MONGO_URI=mongodb://mongo:27018
     ports:
       - "8080:8080"
 
@@ -42,3 +55,4 @@ services:
 
 volumes:
   mongo_db:
+  mysql-db:
