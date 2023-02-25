@@ -9,7 +9,7 @@ services:
     ports:
       - '3306:3306'
     volumes:
-      - mysql-db:/var/lib/mysql
+      - mysql_db:/var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: mysql
 
@@ -55,4 +55,4 @@ services:
 
 volumes:
   mongo_db:
-  mysql-db:
+  mysql_db:
